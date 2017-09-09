@@ -1,1 +1,2 @@
 # JavaScript
+- For assignments.    
