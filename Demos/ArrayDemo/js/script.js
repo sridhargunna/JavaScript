@@ -1,4 +1,5 @@
 var array = [];
+var sum =0;
 
 function updateArray(){
     var output = document.getElementById('arrayOutput');
@@ -14,13 +15,14 @@ function updateArray(){
 function pushToArray(){
     var input = document.getElementById('arrayInput');
     var item = input.value;
-    if(item){
-        array.push(item);  
+    if(item && (!isNaN(item))){        
+        array.push(Number(item));  
         updateArray(); 
         input.value = ""; 
+        console.log(array);
     }
     else{
-        alert('Please enter value in the input box')
+        alert('Please enter valid number in the input box')
     }
     
 }
@@ -38,8 +40,8 @@ function popFromArray() {
 function unshiftFromArray(params) {
     var input = document.getElementById('arrayInput');
     var item = input.value;
-    if(item){
-        array.unshift(item);  
+    if(item && (!isNaN(item))){
+        array.unshift(Number(item));  
         updateArray(); 
         input.value = ""; 
     }
@@ -56,4 +58,13 @@ function shiftFromArray() {
     else{
         alert('Empty aarray...!')
     }
+}
+
+function forEachArray() {
+    array.forEach(add);
+    alert("Sum : "+sum);
+}
+
+function add(number) {
+  sum += number;
 }
