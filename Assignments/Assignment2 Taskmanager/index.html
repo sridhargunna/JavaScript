@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <title>Task keep</title>
+    <link rel="stylesheet" href="cs/styles.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.2.min.js"></script>
+    
+</head>
+
+<body >
+    <header class="page_header">
+        Task keep       
+    </header>
+    <section class="main_section">            
+            <section class="task" id="task">
+                    <header class ="task_header">   
+                        Enter task details
+                    </header>
+                    <summary class="progressSection">
+                        <label>Pending Tasks : </label><output name="PendingTasks" class="pendingOutput" id="tasksPending">0</output>
+                        <label>Completed Tasks : </label><output name="CompletedTasks" class="completedOutput" id="tasksCompleted">0</output>
+                        <label>Progress : </label><output name="Progress" id="tasksProgress">0</output><span>%</span>
+                    </summary>
+                        <form class="task_form"> 
+                            <label for="taskName">Task Name :</label><input name="taskName" type="text" id="taskName" placeholder="Enter task name " /><br>
+                                                
+                            <label for="status">Task Status:</label>
+                            <select name="status" id="status">
+                                <option value="true">Completed</option>
+                                <option selected="selected" value="false">Pending</option>                                    
+                            </select><br>
+                            <label for = "tag">Tag : </label><input id="tag" name="tag" type="text" placeholder="add tag"/><button id="bt_tag" onclick="return addTag()">+</button>
+                            <section id="tags" class="tagsSection">
+                            </section>
+                            <input type="button" id="saveButton" onclick="addTask()" value="SAVE">
+                        </form>
+                    <section class = "searchAndNav">
+                        <section class ="sertchSection">
+                            <input type="text" name="sertchSection" id="sertchBox" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name"/>
+                        </section>
+                        <section class = "showPending">
+                            <input type="checkbox" name="pending" id="pendingCb" onclick="showPending()"/><ion-delete-button>
+                            <span>Show Pending</span>
+                            <a href="#" onclick="deleteComplete()">Delete Complete</a>                           
+                        </section>
+                    </section>                            
+                    <section class="taskTableSection">
+                        <table id="myTable">
+                            <thead id="tableHead">
+                                <tr class="header">
+                                    <th style="width:2%;">Complete</th>
+                                    <th style="width:18%;">Name</th>
+                                    <th style="width:20%;">Tags</th>
+                                    <th style="width:20%;">Status</th>
+                                    <th style="width:20%;">Action</th>    
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody">
+                            </tbody>
+                        </table>
+                    </section> 
+                </section>            
+    </section>
+
+    <script type="text/javascript" src="js/script.js"></script>
+</body>
+
+</html>
