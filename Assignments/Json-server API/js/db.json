@@ -1,0 +1,37 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "name": "task1",
+      "tags": [
+        "work"
+      ],
+      "isCompleted": false
+    },
+    {
+      "id": 2,
+      "name": "task2",
+      "tags": [
+        "game"
+      ],
+      "isCompleted": true
+    },
+    {
+      "name": "task3",
+      "tags": [
+        "Reading"
+      ],
+      "isCompleted": true,
+      "id": 3
+    },
+    {
+      "name": "Shoping",
+      "tags": [
+        "DMART",
+        "Shop2"
+      ],
+      "isCompleted": true,
+      "id": 4
+    }
+  ]
+}
