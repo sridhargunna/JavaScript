@@ -4,13 +4,16 @@
 
     - var joinedValue = new Array(256).join('a');
         - It Returns a string with 255 'a'. The reason is if any element is undefined it replace with ''.
-- What is the output of below code
-    ``` 
+- What is the output of below code?
+    ```js 
         var a;
         console.log(a+'a');
-    ```
-    > undefineda
+        
+        output :  undefineda
+    ```    
 - Check for Array-ness
-    ```console.log(typeof [1, 2]); // "object"```, 
+    ```js
+    console.log(typeof [1, 2]); // "object"
+    ```
     - Then how to check whether a variable is an arry or not?
         - ECMAScript 5 defines a new method Array.isArray(), which returns true if the argument is an array.
