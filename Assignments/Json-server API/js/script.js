@@ -93,7 +93,7 @@
      * It updates the task in db
      * @param {Id of the task to update } id 
      */
-    function updateInDb(taks){
+    function updateInDb(task){
         return new Promise( function (resolve,reject){
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
@@ -109,7 +109,7 @@
                 }
             };            
             var json = JSON.stringify(task);
-            xhttp.open("PUT", "http://localhost:3000/tasks/"+taks.id, true);
+            xhttp.open("PUT", "http://localhost:3000/tasks/"+task.id, true);
             xhttp.setRequestHeader('Content-Type', 'application/json');
             xhttp.send(json);
         });
@@ -324,6 +324,7 @@
                 for(tag of tagsArray){
                     addTagToTagsSection(tag)
                 }
+                updateInDb(task);
                 console.log(this.parentNode.parentNode);
                 updateRow = this.parentNode.parentNode;
                 taskSaveButton.onclick = Update; 
@@ -434,9 +435,11 @@
             updateTask.name =  taskName.value;
             updateTask.status = taskStatus.value=="true";
             updateTask.tags = _tags;
+            updateInDb(updateTask);
             var tbody =  updateRow.parentNode;
             taskName.value="";
             taskStatus.value = false;
+            
             _tags=[];
             var tags = document.getElementById('tags');
             tags.textContent="";
