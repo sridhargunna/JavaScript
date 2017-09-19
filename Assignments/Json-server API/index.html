@@ -7,9 +7,60 @@
         <link href="cs/styles.css" rel="stylesheet">
     </head>
     <body>
-        <input type="button"  value="Add" onclick="AddTasks()">
-        <input type="button"  value="Load" onclick="Load()">
-        <p id="demo"></p>
+
+        <header class="page_header">
+            Task keep       
+        </header>
+        <section class="main_section">
+            <section class="task" id="task">
+                    <header class ="task_header">   
+                        Enter task details
+                    </header>
+                    <summary class="progressSection">
+                        <label>Pending Tasks : </label><output name="PendingTasks" class="pendingOutput" id="tasksPending">0</output>
+                        <label>Completed Tasks : </label><output name="CompletedTasks" class="completedOutput" id="tasksCompleted">0</output>
+                        <label>Progress : </label><output name="Progress" id="tasksProgress">0</output><span>%</span>
+                    </summary>
+                    <form class="form">
+                        <label for="name">Name :</label><input id="name_txt" class="formInput" type="text" name="id" placeholder="Enter Name.."><br>
+                        <label for="status">Task Status:</label>
+                        <select name="status" id="status_option" class="formInput">
+                            <option value=true>Completed</option>
+                            <option value=false selected="selected">Pending</option>
+                        </select><br>
+                        <label for = "tag">Tag : </label><input id="tag" class="formInput" name="tag" type="text" placeholder="add tag"/><input type="button" id="bt_savetag" value="+">
+                        <section id="tags" class="tagsSection">
+                        </section>
+                        <input type="button" id="bt_savetask" value="SAVE">
+                        <input type="button" id="bt_clear" value="Cancel">
+                    </form>
+                    <section class = "searchAndNav">
+                        <section class ="sertchSection">
+                            <input type="text" name="sertchSection" id="sertchBox"  placeholder="Search for names.." title="Type in a name"/>
+                        </section>
+                        <section class = "showPending">
+                            <input type="checkbox" name="pending" id="pendingCb" /><ion-delete-button>
+                            <span>Show Pending</span>
+                            <a href="#" id="deleteCompleted" >Delete Complete</a>                           
+                        </section>
+                    </section>                            
+                    <section class="taskTableSection">
+                        <table id="myTable">
+                            <thead id="tableHead">
+                                <tr class="header">
+                                    <th style="width:2%;">Complete</th>
+                                    <th style="width:18%;">Name</th>
+                                    <th style="width:20%;">Tags</th>
+                                    <th style="width:20%;">Status</th>
+                                    <th style="width:20%;">Action</th>    
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody">
+                            </tbody>
+                        </table>
+                    </section>
+            </section>
+        </section>
     </body>
     <script type="text/javascript" src="js/script.js"></script>
 </html>
