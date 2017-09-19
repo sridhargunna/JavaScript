@@ -2,14 +2,25 @@
  * IIF to intialize and attach event handlers.
  */
 (function () {
+    // Arrays to store tags and tasks
     var _tags = [];
     var _tasks = [];
+
+    // Buttons
     var tagSaveButton = document.getElementById("bt_savetag");
     var taskSaveButton = document.getElementById("bt_savetask");
     var sertchSection = document.getElementById("sertchBox");
     var pending = document.getElementById("pendingCb");
     var deleteAll = document.getElementById("deleteCompleted");
     var clearAll = document.getElementById("bt_clear");
+
+    // Form inputs
+    var taskName = document.getElementById("name_txt");
+    var taskStatus = document.getElementById("status_option");
+    var taskTags = document.getElementById('tags');
+
+    // Row to update
+    var updateRow;
 
     tagSaveButton.onclick = addTags;    
     pending.onclick = showPending;
@@ -171,12 +182,30 @@
         });
     }());
 
+
+    function addTagToTagsSection(tag){    
+        _tags.push(tag);
+        var tagX = document.createElement('a');
+        tagX.setAttribute("class", "removeTag");
+        tagX.setAttribute("href", "#");
+        tagX.textContent = 'X';
+        var tagLabel = document.createElement("label");
+        tagLabel.textContent = tag + " ";
+        taskTags.appendChild(tagLabel);
+        taskTags.appendChild(tagX);
+        tagX.onclick = function(){
+            taskTags.removeChild(tagLabel);
+            taskTags.removeChild(tagX);
+            var index = _tags.indexOf(tag);
+            _tags.splice(index,1);
+        } 
+    }
+
     function addTags() {
         var tagElement = document.getElementById('tag');
         var tag = tagElement.value;
         if(tag){
-            //addTagToTagsSection(tag);
-            _tags.push(tag);
+            addTagToTagsSection(tag);
             tagElement.value="";
         }
         else{
@@ -186,28 +215,22 @@
     }
 
     function Clear() {
-        var name = document.getElementById("name_txt");
-        var status = document.getElementById("status_option");
-        var tags = document.getElementById('tags');
-
-        name.value="";
-        status.value = false;
-        tags.textContent="";
+        taskName.value="";
+        taskStatus.value = false;
+        taskTags.textContent="";
         _tags = [];
+        taskSaveButton.onclick = saveTask;
     }
 
-    
-    function saveTask() {
-        var name = document.getElementById("name_txt");
-        var status = document.getElementById("status_option");
-        var currentTask = new Task(name.value,_tags,status.value=="true");
-        if(name.value){
-            if(name.value.length<100){
-                console.log(name.value);
-                console.log(status.value);
 
-                //_tasks.push(currentTask);
+    function saveTask() {
+        var currentTask = new Task(taskName.value,_tags,taskStatus.value=="true");
+        if(taskName.value){
+            if(taskName.value.length<100){
+                console.log(taskName.value);
+                console.log(taskStatus.value);
                 postTaskToDB(currentTask);
+
                 // Clearing the vaues
                 Clear();
                 console.log(JSON.stringify(currentTask));               
@@ -241,8 +264,8 @@
         row.appendChild(nameColumn);
 
         var tagsColumn = document.createElement('td');
-        var tags = task.tags.join(', ');
-        tagsColumn.textContent = tags;
+        var tagValues = task.tags.join(', ');
+        tagsColumn.textContent = tagValues;
         row.appendChild(tagsColumn);
 
         var statusColumn = document.createElement('td');
@@ -294,20 +317,16 @@
         }
 
         editButton.onclick = function(){
-                var taskName = document.getElementById("taskName");
-                var taskStatus = document.getElementById("status");
-                var tags = document.getElementById('tags');
-                tags.textContent = "";
+                taskTags.textContent = "";
                 taskName.value = task.name;
                 taskStatus.value = task.status;
                 var tagsArray=task.tags;
-            for(tag of tagsArray){
-                addTagToTagsSection(tag)
+                for(tag of tagsArray){
+                    addTagToTagsSection(tag)
                 }
                 console.log(this.parentNode.parentNode);
                 updateRow = this.parentNode.parentNode;
-                    var bt = document.getElementById('saveButton');
-                    bt.onclick = Update; 
+                taskSaveButton.onclick = Update; 
             }
 
         statusCheckbox.onchange =function() {
@@ -327,7 +346,10 @@
             });            
         }
         console.log(_tasks); 
-        calculateProgress();   
+        // TO calculate progress for every addition and updation of task
+        calculateProgress();
+        // To check whether the filer is applied or not 
+        showPending();
     }
 
     function calculateProgress(){
@@ -403,42 +425,23 @@
         }
     }
 
-
-         
+    function Update(){
+        console.log(updateRow.rowIndex);
+        var taskIndex = updateRow.rowIndex-1;
+        console.log(_tasks[taskIndex]);
+        var updateTask = _tasks[taskIndex];
+        if(taskName.value){
+            updateTask.name =  taskName.value;
+            updateTask.status = taskStatus.value=="true";
+            updateTask.tags = _tags;
+            var tbody =  updateRow.parentNode;
+            taskName.value="";
+            taskStatus.value = false;
+            _tags=[];
+            var tags = document.getElementById('tags');
+            tags.textContent="";
+            addToTable(updateTask,updateRow);
+        }
+        taskSaveButton.onclick = saveTask;
+    }
 })();
-
-
-
-
-
-/*
-
-function AddTasks() {
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-        document.getElementById("demo").innerHTML =
-        this.responseText;
-        console.log(this.responseText);
-        }
-    };
-    var task = {name:"Shoping",tags:["DMART","Shop2"],isCompleted:true};
-    xhttp.open("POST", "http://localhost:3000/tasks/", true);
-    console.log(JSON.stringify(task));
-    xhttp.setRequestHeader('Content-Type', 'application/json');
-    xhttp.send(JSON.stringify(task));
-}
-
-function Load(){
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-        document.getElementById("demo").innerHTML =
-        this.responseText;
-        console.log(this.responseText);
-        }
-    };
-    xhttp.open("GET", "http://localhost:3000/tasks/", true);
-    xhttp.send();
-}
-*/

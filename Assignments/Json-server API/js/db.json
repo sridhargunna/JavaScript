@@ -9,12 +9,23 @@
       "id": 2
     },
     {
-      "name": "Learning",
+      "name": "Reading",
       "tags": [
-        "GraphQL"
+        "C#",
+        "Java"
+      ],
+      "status": true,
+      "id": 3
+    },
+    {
+      "name": "Playing",
+      "tags": [
+        "TT",
+        "Cricket",
+        "Chess"
       ],
       "status": false,
-      "id": 3
+      "id": 4
     }
   ]
 }
