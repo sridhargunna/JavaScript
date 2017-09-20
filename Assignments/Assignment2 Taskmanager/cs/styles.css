@@ -1,0 +1,110 @@
+body{
+    background: #e8e8e8;
+}
+.page_header{
+    background: #418bfb;
+    width: 100%;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-family: 'Cinzel', Georgia, serif;
+    font-size: -webkit-xxx-large;
+}
+
+.main_section{
+    margin: auto;
+    width: 90%;
+    text-align: center;
+    padding: 5px;
+    margin-top: inherit;
+    color: black;
+    font-family: Georgia, 'Nimbus Roman No9 L', 'Century Schoolbook L', serif;
+    background: white;
+    font-size: x-large;
+}
+.task{
+    margin: auto;
+    width: 90%;
+    text-align: center;
+    padding: 5px;
+    margin-top: inherit;
+    color: black;
+    background: blanchedalmond;
+    font-size: large;
+    margin-top: 5px;
+}
+.task_header{
+    font-size: large;
+    background: cornflowerblue;
+    color: white;
+    padding: 0.5%;
+    font-size: xx-large;
+}
+.taskTableSection{
+    margin: auto;
+    overflow-y: auto;
+    height: 500PX;
+}
+
+.task_form{
+    width: 50%;
+    margin: 2% 25%;
+    border: solid blueviolet;
+    text-align: left;
+    padding: 1%;
+}
+
+
+#myTable {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #ddd;
+  font-size: 18px;
+}
+
+#myTable th, #myTable td {
+  text-align: left;
+  padding: 12px;
+}
+
+#myTable tr {
+  border-bottom: 1px solid #ddd;
+}
+
+#myTable tr.header, #myTable tr:hover {
+  background-color: #f1f1f1;
+}
+
+.tagsSection{
+    margin-left: 10%;
+    min-height: 3em;
+    background: white;
+}
+.removeTag{
+    margin-right: 3%;
+}
+
+.actionButton{
+    margin-left: 5%;
+}
+
+.searchAndNav{
+    min-height: 2em;
+}
+
+.sertchSection{
+    float: left;
+}
+
+.showPending{
+    float: right;
+}
+
+.progressSection {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.pendingOutput, .completedOutput {
+    margin-right: 1em;
+}
