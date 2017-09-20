@@ -53,20 +53,10 @@
                 console.log("In if")            
                 var taskObj = JSON.parse(this.responseText);
                 _tasks.push(taskObj);
-                addToTable(taskObj);
-                console.log("In http :");
-                console.log(this.responseText);                
-                console.log(_tasks);            
-            }
-            else{
-                console.log("In else")
-                console.log(this.readyState);
-                console.log("Status :"+this.status);
-                console.log(this.responseText);
+                addToTable(taskObj);            
             }
         };
         xhttp.open("POST", "http://localhost:3000/tasks/", true);
-        //console.log(JSON.stringify(task));
         xhttp.setRequestHeader('Content-Type', 'application/json');
         xhttp.send(JSON.stringify(task));        
     }
@@ -76,11 +66,7 @@
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
-                    // document.getElementById("demo").innerHTML =
-                    // this.responseText;
-                    console.log("In get :"+this.responseText);
                     _tasks = JSON.parse(this.responseText);
-                    console.log(_tasks);
                     resolve(_tasks);
                 }
             };
@@ -98,14 +84,7 @@
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
                 if (this.readyState == 4 &&  (this.status == 201 || this.status == 200) ) {
-                    // document.getElementById("demo").innerHTML =
-                    // this.responseText;
-                    console.log("In updateInDb :"+this.responseText);                    
-                    console.log(_tasks);
                     resolve(this.responseText);
-                }
-                else{
-                    console.log("In else updateInDb :"+this.responseText); 
                 }
             };            
             var json = JSON.stringify(task);
@@ -120,10 +99,6 @@
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
-                    // document.getElementById("demo").innerHTML =
-                    // this.responseText;
-                    console.log("In deleteFromDb if :"+this.responseText);
-                    
                     resolve(this.responseText);
                 }
             };
@@ -139,31 +114,27 @@
         if(isRemovable){  
             var indexes = [];
             var names = [];
-            var len = _tasks.length;
-            // Loop through all tasks of _tasks array. 
-                //  1. First check whether the status of the current task is true.
-                //      i. If it is true delete it from array and remove that row from table. But dont update index value because if we remove element form array 
-                //         the next element shifted to current index position so we need to check it's status also. If we increment the i value we miss the next element.
-                //      ii. If it false now increment the i value.
+            var len = _tasks.length;    
+            /**
+             * Loop through all tasks of _tasks array.
+             *  1. First check whether the status of the current task is true.
+             *        i. If it is true delete it from array and remove that row from table. But dont update index value because if we remove element form array
+             *           the next element shifted to current index position so we need to check it's status also. If we increment the i value we miss the next element.
+             *       ii. If it false now increment the i value.
+             */
             for(var i=0;i<len;){
                 currrentTask = _tasks[i];
                 if(currrentTask && currrentTask.status){
-                    console.log("Before ");       
-                    console.log(_tasks);
                     names.push(currrentTask.name);
                     var index = _tasks.findIndex(elem=>elem.id==currrentTask.id)
-                    // console.log("index"+index);
                     deleteFromDb(currrentTask.id);
-                     _tasks.splice(index,1);                            
-                    console.log("After "); 
-                    console.log(_tasks);        
+                     _tasks.splice(index,1);         
                     tbody.deleteRow(index);
                 }
                 else{
                     i++;
                 }
             }
-            console.log(names);
             calculateProgress();
         }
     }
@@ -211,7 +182,6 @@
         else{
             alert("Tag required..!")
         }        
-        console.log(_tags);
     }
 
     function Clear() {
@@ -227,13 +197,10 @@
         var currentTask = new Task(taskName.value,_tags,taskStatus.value=="true");
         if(taskName.value){
             if(taskName.value.length<100){
-                console.log(taskName.value);
-                console.log(taskStatus.value);
                 postTaskToDB(currentTask);
 
                 // Clearing the vaues
-                Clear();
-                console.log(JSON.stringify(currentTask));               
+                Clear();               
             }
             else{
                 alert("Task name should not be greatere than 100 characters ..!")
@@ -242,8 +209,6 @@
         else{
             alert("Task name is required..!");
         }
-        
-        //console.log(_tasks);
     }
 
     function addToTable(task,oldRow){
@@ -305,12 +270,8 @@
         deleteButton.onclick = function(){
             var isRemovable = confirm("Do you want to delete?");
             if(isRemovable){  
-                console.log("Before ");       
-                console.log(_tasks);
                 deleteFromDb(task.id);
-                _tasks.splice(_tasks.findIndex(elem=>elem.id==task.id),1);                               
-                console.log("After "); 
-                console.log(_tasks);          
+                _tasks.splice(_tasks.findIndex(elem=>elem.id==task.id),1);        
                 tbody.removeChild(row);
             }
             calculateProgress();
@@ -325,7 +286,6 @@
                     addTagToTagsSection(tag)
                 }
                 updateInDb(task);
-                console.log(this.parentNode.parentNode);
                 updateRow = this.parentNode.parentNode;
                 taskSaveButton.onclick = Update; 
             }
@@ -341,14 +301,13 @@
             }
             let promise = updateInDb(task);
             promise.then(function(){
-                console.log(_tasks);
-                console.log(task.name);
                 calculateProgress();
             });            
         }
-        console.log(_tasks); 
+
         // TO calculate progress for every addition and updation of task
         calculateProgress();
+
         // To check whether the filer is applied or not 
         showPending();
     }
@@ -436,13 +395,7 @@
             updateTask.status = taskStatus.value=="true";
             updateTask.tags = _tags;
             updateInDb(updateTask);
-            var tbody =  updateRow.parentNode;
-            taskName.value="";
-            taskStatus.value = false;
-            
-            _tags=[];
-            var tags = document.getElementById('tags');
-            tags.textContent="";
+            Clear();
             addToTable(updateTask,updateRow);
         }
         taskSaveButton.onclick = saveTask;
