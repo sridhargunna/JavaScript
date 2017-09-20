@@ -1,0 +1,46 @@
+{
+  "tasks": [
+    {
+      "name": "Learning",
+      "tags": [
+        "GraphQL"
+      ],
+      "status": false,
+      "id": 2
+    },
+    {
+      "name": "Call",
+      "tags": [
+        "Call cancelled"
+      ],
+      "status": true,
+      "id": 3
+    },
+    {
+      "name": "Playing",
+      "tags": [
+        "TT",
+        "Cricket",
+        "Chess"
+      ],
+      "status": false,
+      "id": 4
+    },
+    {
+      "name": "Angular",
+      "tags": [
+        "Routing"
+      ],
+      "status": false,
+      "id": 5
+    },
+    {
+      "name": "EDX",
+      "tags": [
+        "HTML by W3C "
+      ],
+      "status": false,
+      "id": 6
+    }
+  ]
+}

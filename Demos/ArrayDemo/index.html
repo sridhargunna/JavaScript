@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <title>Array Demo</title>
+    <link rel="stylesheet" href="cs/styles.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.2.min.js"></script>
+    
+</head>
+
+<body >
+    <header class="page_header">
+        Array Demo       
+    </header>
+    <section class="main_section">            
+            <header>
+                Array operations :
+            </header>
+            
+            <article>
+                <input type="text" name="elememt" id="arrayInput" placeholder="enter number in the input box" class="inputBox"><br>
+                <section class="insertAndDelete">
+                    <header>
+                        Array insertion and deletions.
+                    </header>
+                    <input type="button" value="push" onclick="pushToArray()" title="Add one element at end of array">
+                    <input type="button" value="pop" onclick="popFromArray()" title="Remove element at end" of array>
+                    <input type="button" value="unshift" onclick="unshiftFromArray()" title="Add one element at start of array">
+                    <input type="button" value="shift" onclick="shiftFromArray()" title="Remove element at start of array">
+                </section>
+                
+                <section class="output" id="arrayOutput">
+
+                </section>
+
+                <section class="advancedMethods">
+                    <header>
+                        Array advanced methods...
+                    </header>
+                    <input type="button" value="push" onclick="forEachArray()" title="sum of elements of array">
+                    <input type="button" value="pop" onclick="popFromArray()" title="Remove element at end" of array>
+                    <input type="button" value="unshift" onclick="unshiftFromArray()" title="Add one element at start of array">
+                    <input type="button" value="shift" onclick="shiftFromArray()" title="Remove element at start of array">
+                </section>
+            </article>
+    </section>
+
+    <script type="text/javascript" src="js/script.js"></script>
+</body>
+
+</html>
