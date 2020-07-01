@@ -16,7 +16,7 @@
     console.log(typeof [1, 2]); // "object"
     ```
     - Then how to check whether a variable is an arry or not?
-        - ECMAScript 5 defines a new method Array.isArray(), which returns true if the argument is an array.        
+        - ECMAScript 5(ES-6) defines a new method Array.isArray(), which returns true if the argument is an array.        
         ```js
           Array.isArray([]); // true
 
@@ -40,3 +40,4 @@
            };
           }
        ```
+
