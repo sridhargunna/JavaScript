@@ -9,7 +9,7 @@
         var a;
         console.log(a+'a');
         
-        output :  undefineda
+        output :  undefined
     ```    
 - Check for Array-ness
     ```js
