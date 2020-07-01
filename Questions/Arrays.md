@@ -11,7 +11,7 @@
         
         output :  undefined
     ```    
-- Check for Array-ness
+- Check for Array-ness:
     ```js
     console.log(typeof [1, 2]); // "object"
     ```
